@@ -7,7 +7,7 @@ var logger = require('morgan');
 //mongoose setup
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb+srv://bryan:test@cluster0.lvuqx.mongodb.net/subscribers?retryWrites=true&w=majority'
-mongoos.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
