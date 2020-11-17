@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-let index = require('../controllers/index')
+let travel = require('../controllers/travel')
 /* GET home page. */
-router.get('/', index.index);
+router.get('/', travel.get_travel);
 
 module.exports = router;
