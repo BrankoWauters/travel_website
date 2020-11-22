@@ -12,7 +12,12 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var email_subscriber = new mongoose.Schema({
-    email: String
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true
+    }
  });
  module.exports = new mongoose.model('Email', email_subscriber);
 
