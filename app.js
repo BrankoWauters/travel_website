@@ -11,18 +11,9 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var email_subscriber = new mongoose.Schema({
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true
-    }
- });
- module.exports = new mongoose.model('Email', email_subscriber);
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
 
 var app = express();
 

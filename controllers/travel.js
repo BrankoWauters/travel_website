@@ -1,13 +1,16 @@
-//const { mongo } = require("mongoose");
+const mongoose = require('mongoose');
+const Email = require("../models/Email");
 
 exports.get_travel = function(req, res, next) {
-    res.render('travel', { title: 'Express' });
+    res.render('travel', { title: 'Travel' });
   }
 
-exports.submit_subscriber = function(req, res, next) {
-    var item = req.body.subscribe_email;
-    console.log("Email subscriber:", item);
-    
+exports.submit_subscriber = async function(req, res, next) {
+    //var item = req.body.subscribe_email;
+    //console.log("Email subscriber:", item);
+    const email = new Email(req.body.submit_subscriber)
+    await email.save();
+    req.flash('success', 'You are now subscribed!');
 
     res.redirect('/');
   }

@@ -1,9 +1,22 @@
 extends layout
 
 block content
+
   h1= title
+
+  if locals.flashes
+  - const categories = Object.keys(locals.flashes)
+  each category in categories
+    each message in flashes[category]
+    .flash(class=`flash--${category}`)
+      p.flash__text!= message
+      button.flash__remove(onClick="this.parentElement.remove()") &times;
+
   p Welcome to #{title}
   //subscribing form
   form(action="/", method="POST")
-    input(name="subscribe_email", type="email", placeholder="Enter email address")
-    button(type="Submit") Submit
+
+  label.label Email
+
+    input.input(name="subscribe_email", type="text", placeholder="Enter email address")
+    input.button(type="submit" value="Submit")
