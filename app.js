@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+require('./models/Email');
+
 
 //mongoose setup
 var mongoose = require('mongoose');
@@ -16,6 +21,20 @@ var usersRouter = require('./routes/users');
 
 
 var app = express();
+
+app.use(session({
+  secret: 'secret',
+  key: 'key',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flashes = req.flash();
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

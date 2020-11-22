@@ -5,12 +5,18 @@ block content
   h1= title
 
   if locals.flashes
-  - const categories = Object.keys(locals.flashes)
-  each category in categories
-    each message in flashes[category]
-    .flash(class=`flash--${category}`)
-      p.flash__text!= message
-      button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+    - const categories = Object.keys(locals.flashes)
+
+    each category in categories
+
+      each message in flashes[category]
+
+        .flash(class=`flash--${category}`)
+
+          p.flash__text!= message
+
+          button.flash__remove(onClick="this.parentElement.remove()") &times;
 
   p Welcome to #{title}
   //subscribing form
